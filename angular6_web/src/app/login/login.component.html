@@ -1,0 +1,32 @@
+<div class="login-page" [@routerTransition]>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <img src="assets/images/logo.png" width="150px" class="user-avatar" />
+            <h3>Sample Theme</h3>
+            <form role="form" name="form" class="form-validation">
+                <fieldset class="form-group">
+                    <div class="form-content">
+                        <div class="form-group">
+                            <input type="text" [(ngModel)]="loginData.username"  name="username" class="form-control input-underline input-lg" id="username" placeholder="User Name">
+                            <span  class="k-tooltip k-tooltip-validation"
+                                *ngIf="requireName">
+                                User Name is required
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" [(ngModel)]="loginData.password" name="password" class="form-control input-underline input-lg" id="password" placeholder="Password">
+                        </div>
+                       
+                        <button autofocus  type="submit"  class="btn rounded-btn btn-block" (click)="onLoggedin()" (disabled)='form.invalid'>Log in</button>
+                        &nbsp;
+                        <a href="javascript:void(0)" (click)="forgetPassword()" >Forgot password?</a>
+                      
+                    </div>
+                </fieldset>
+               <!--  <a class="btn rounded-btn btn-block"    (click)="onLoggedin()"> Log in </a> -->
+               <!--  <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a>  -->
+            </form>
+        </div>
+    </div>
+</div>
+<div kendoDialogContainer></div>

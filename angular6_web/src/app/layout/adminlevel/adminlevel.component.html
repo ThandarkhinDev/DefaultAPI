@@ -1,0 +1,92 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+	<div class="col w-lg bg-light dk b-r b-b bg-auto">
+		<div>
+			<div class="row-row">
+				<div class="cell scrollable hover">
+					<div class="cell-inner">
+						<div class="padder">
+							<div class="list-group m-t">
+								<a *ngFor="let adminLevelSet of adminLevelSets" class="list-group-item hover-anchor" (click)="selectedAdminLevel(adminLevelSet.AdminLevelID)">
+									<span class="block text-ellipsis" ng-class="{'m-l-none': adminLevelSet.selected }">
+										<strong> {{ adminLevelSet.AdminLevel }} </strong>
+									</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- column -->
+	 <div class="col">
+		<div class="">
+			<div class="row-row">
+				<div class="cell">
+					<div class="cell-inner">
+						<div class="wrapper-md ng-scope b-b bg-white-only">
+							<h1 class="m-n h4"> Admin Level Setup </h1>
+						</div>
+						<div class="wrapper-md lter">
+							<div class="hbox h-auto"></div>
+							<form [formGroup]="editForm" name="editForm" class="form-horizontal form-validation pt-4" novalidate>
+								<div class="form-group m-b-sm">
+									<label class="col-sm-4 control-label">Admin Level Name : <span class="text-danger text-xl font-bold v-middle">*</span></label>
+									<div class="col-md-6 col-sm-7">
+										<input type="text"  class="form-control" name="AdminLevel" formControlName="AdminLevel"  disabled/>
+										<div  class="k-tooltip k-tooltip-validation"
+											[hidden]="editForm.controls.AdminLevel.valid || editForm.controls.AdminLevel.pristine">
+											Admin Level is required
+									</div>
+									</div>
+								</div>
+								 <div class="form-group m-b-sm">
+									<label class="col-sm-4 control-label">Restricted IP List : </label>
+									<div class="col-md-6 col-sm-7">
+										<textarea class="form-control"  name="IP" formControlName="restricted_iplist"></textarea>
+									</div>
+								</div>
+							
+								<div class="form-group m-b-sm">
+									<label class="col-sm-4 control-label">Description :</label>
+									<div class="col-md-6 col-sm-7">
+										<input type="text" class="form-control ng-dirty ng-touched" name="Description" formControlName="Description" autocomplete="off"/>
+									</div>
+								</div>	
+								<div class="form-group m-b-sm">
+									<label class="col-sm-4 control-label">Remark :</label>
+									<div class="col-md-6 col-sm-7">
+										<textarea name="remark" class="form-control ng-dirty ng-touched" formControlName="Remark"></textarea>
+									</div>
+								</div>
+								<div class="form-group m-b-sm">
+									<label class="col-sm-4 control-label">Menu Permission :</label>
+									<div class="col-md-6 col-sm-7">
+										<div class="wrapper-xs scrollable" style="max-height: 190px; border: 1px solid #cfdadd" id="mnuTree">
+											<!-- <ngx-treeview [config]="config" [items]="items" (selectedChange)="values = $event" #treeview> -->
+											<ngx-treeview [config]="config" [items]="items" [itemTemplate]="itemTemplate" (selectedChange)="onSelectedChange($event)" #treeview>
+											</ngx-treeview>
+										</div>
+									</div>
+								</div> 
+								<div class="form-group m-b-sm">
+									<div class="col-sm-offset-4 col-md-7">
+										<button *ngxPermissionsOnly="'edit'" type="submit" class="btn m-b-xs btn-info" (click)="newAdminLevel()" >New</button>
+										<button *ngxPermissionsOnly="'edit'" [disabled]="!editForm.valid" type="submit md-ink-ripple" class="btn m-b-xs btn-success" (click)="saveAdminLevel()" >Save</button>
+										<button *ngxPermissionsOnly="'delete'" [disabled]="!editForm.valid" class="btn m-b-xs btn-danger" (click)="deleteConfirm()" >Delete</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> 
+	<!-- Column -->
+</div>
+
+<div kendoDialogContainer></div>
+

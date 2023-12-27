@@ -1,0 +1,66 @@
+
+<div class="col">
+  <div class="">
+    <div class="row-row">
+      <div class="cell">
+        <div class="cell-inner">
+          <div class="wrapper-md ng-scope b-b bg-white-only">
+            <h1 class="m-n h3 font-thin"> Income Edit/Create Form</h1>
+          </div>
+          <div class="wrapper-md lter">
+            <div class="hbox h-auto"></div>
+            <form name="editForm" [formGroup]="editForm" class="form-horizontal form-validation pt-4" novalidate>
+              <div class="form-group m-b-sm">
+                <label class="col-sm-4 control-label">Income ID : <span class="text-danger text-xl font-bold v-middle">*</span></label>
+                <div class="col-md-6 col-sm-7">
+                  <input type="text" name="IncomeID" class="form-control" formControlName="IncomeID" disabled/>
+                </div>
+              </div>
+              <div class="form-group m-b-sm">
+                <label class="col-sm-4 control-label">Donar Name : <span class="text-danger text-xl font-bold v-middle">*</span></label>
+                <div class="col-md-6 col-sm-7">
+                  <input type="text" name="DonarName" class="form-control" formControlName="DonarName" />
+                  <div  class="k-tooltip k-tooltip-validation"
+                        [hidden]="editForm.controls.DonarName.valid || editForm.controls.DonarName.pristine">
+                    Officer Name is required
+                  </div>
+                </div>
+              </div>
+              <div class="form-group m-b-sm">
+                <label class="col-sm-4 control-label">Amount : <span class="text-danger text-xl font-bold v-middle">*</span></label>
+                <div class="col-md-6 col-sm-7">
+                  <input type="text" name="Amount" class="form-control" formControlName="Amount" />
+                  <div  class="k-tooltip k-tooltip-validation"
+                        [hidden]="editForm.controls.Amount.valid || editForm.controls.Amount.pristine">
+                    Amount is  required
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="form-group m-b-sm">
+                <label class="col-sm-4 control-label">Transaction Date :</label>
+                <div class="col-md-6 col-sm-7">
+                  <textarea name="nrc" class="form-control ng-dirty ng-touched" formControlName="nrc"></textarea>
+                  <div  class="k-tooltip k-tooltip-validation"
+                      [hidden]="editForm.controls.nrc.valid || editForm.controls.nrc.pristine">
+                      Nrc is required
+                  </div>
+                </div>
+              </div> -->
+        
+          
+             
+              <div class="form-group m-b-sm">
+                <div class="col-sm-offset-4 col-md-7">
+                  <button type="submit" class="btn m-b-xs btn-success" *ngIf="isNewIncome" [disabled]="!editForm.valid" (click)="saveIncome()" > Create </button>
+                  <button type="submit" class="btn m-b-xs btn-success" *ngIf="!isNewIncome" [disabled]="editForm.invalid" (click)="saveIncome()"> Update </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div kendoDialogContainer></div>

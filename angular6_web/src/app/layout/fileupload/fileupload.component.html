@@ -1,0 +1,34 @@
+<p>
+  fileupload works!
+</p>
+
+<div *ngIf="imagePreviews.length" class="img-preview example-config">
+  <h3>Preview selected images</h3>
+  <img *ngFor="let image of imagePreviews"
+    [src]="image.src"
+    alt="image preview"
+    style="width: 200px; margin: 10px;" />
+</div>
+<div>
+  <kendo-upload required
+  [batch]="true"
+  [multiple]="true"
+  [restrictions]="uploadRestrictions"
+  [autoUpload]="false"
+  (select)="selectEventHandler($event)"
+  (clear)="clearEventHandler($event)"
+  (remove)="removeEventHandler($event)"
+  (complete)="completeEventHandler($event)"
+  (upload)="uploadEventHandler($event)">
+  <ng-template kendoUploadFileTemplate let-files let-state="state">
+    <div>Name: {{files[0].name}} Size: {{files[0].size}} bytes</div>
+    <button *ngIf="state"
+      (click)="remove(myUpload, files[0].uid)"
+        class="k-button" style="position: absolute; right: .2em;">
+        Remove
+    </button>
+  </ng-template>
+</kendo-upload>
+</div>
+
+

@@ -1,0 +1,138 @@
+<div>
+	<div class="col-md-12">
+		<div class="grid-wrapper">
+			<h1>Date Picker</h1>
+		</div>
+	</div>
+</div>
+  
+
+<!--  message pop up --> 
+<div kendoDialogContainer></div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="grid-wrapper">
+			<kendo-grid style="height: 300px;"
+			[data]="view | async"
+			[height]="533"
+			[pageSize]="gridState.take"
+			[pageable]="{
+				buttonCount: 5,
+				info: true,
+				type: 'input',
+				pageSizes: true,
+				previousNext: true
+			  }" 
+			[skip]="gridState.skip" 
+			[sort]="gridState.sort" 
+			[filter]="gridState.filter" 
+			[filterable]="true"
+			[sortable]="true" 
+			(dataStateChange)="onStateChange($event)">
+			<ng-template kendoGridToolbarTemplate let-dataItem>
+					<kendo-datepicker
+					[bottomView]="'year'"
+					[topView]="'decade'"
+					[format]="'MMMM yyyy'"
+					[(value)]="value"
+				></kendo-datepicker>
+				<h3 class="k-primary">Income</h3>
+			</ng-template>
+				<kendo-grid-column field="IncomeID" title="ID"></kendo-grid-column>
+				<kendo-grid-column field="DonarName" title="Donar Name"></kendo-grid-column>
+				<kendo-grid-column field="Amount" title="Amount"></kendo-grid-column>
+				<kendo-grid-column field="transaction_date" title="Transaction Date"></kendo-grid-column>
+				<kendo-grid-column field="modified_date" title="Last Modified">
+					<ng-template kendoGridFilterCellTemplate let-filter>
+						<kendo-dropdownlist
+							[(ngModel)]="selectedItem"
+							(valueChange) = "onChange($event)"
+							[data] = "stateComboData" 
+							[defaultItem] = "{ statename: 'Select item...', stateid: null }"
+							[textField] = "'statename'"
+							[valueField] = "'stateid'"
+							[valuePrimitive] = "true">
+						</kendo-dropdownlist>
+					</ng-template>
+				</kendo-grid-column>
+				<kendo-grid-column field="LoginName" title="LoginName" hidden="true"></kendo-grid-column>
+				<kendo-grid-column field="address" title="address" hidden="true"></kendo-grid-column>
+				<kendo-grid-column field="phone" title="phone" hidden="true"></kendo-grid-column>
+				<kendo-grid-column field="nrc" title="nrc" hidden="true"></kendo-grid-column>
+				<kendo-grid-column field="stateid" title="stateId" hidden="true"></kendo-grid-column>
+				<kendo-grid-command-column title="Action" width="200">
+					<ng-template kendoGridCellTemplate let-dataItem>
+						<a class="btn" *ngxPermissionsOnly="'edit'" (click)="editHandler(dataItem)" title="Edit Officer"><i class="fa fa-edit"></i></a>
+						<a class="btn" *ngxPermissionsOnly="'delete'" (click)="showConfirmation(dataItem)" title="Delete Officer"><i class="fa fa-trash"></i></a>
+						<a class="btn" *ngxPermissionsOnly="'edit'" (click)="unBlock(dataItem)" title="UnBlock"><i class="fa fa-unlock"></i></a>
+						<a class="btn" *ngxPermissionsOnly="'edit'" (click)="resetPassword(dataItem)" title="Reset Password"><i class="fa fa-refresh"></i></a>
+					</ng-template>
+				</kendo-grid-command-column>
+			</kendo-grid>
+			<div *ngIf="view.loading" class="k-i-loading"></div>
+		</div>
+	</div>
+</div>
+
+<!-- </hr> -->
+<div class="row">
+	<div class="col-md-12">
+		<div class="grid-wrapper">
+			<kendo-grid style="height: 300px;"
+			[data]="view1 | async"
+			[height]="533"
+			[pageSize]="gridState1.take"
+			[pageable]="{
+				buttonCount: 5,
+				info: true,
+				type: 'input',
+				pageSizes: true,
+				previousNext: true
+			  }" 
+			[skip]="gridState1.skip" 
+			[sort]="gridState1.sort" 
+			[filter]="gridState1.filter" 
+			[filterable]="true"
+			[sortable]="true" 
+			(dataStateChange)="onStateChange($event)">
+
+			<ng-template kendoGridToolbarTemplate let-dataItem>
+				<h3 class="k-primary">Expense</h3>
+			</ng-template>
+				<kendo-grid-column field="ExpenseID" title="ID"></kendo-grid-column>
+				<kendo-grid-column field="ParticularName" title="Particular Name "></kendo-grid-column>
+				<kendo-grid-column field="Amount" title="Amount"></kendo-grid-column>
+				<kendo-grid-column field="transaction_date" title="Transaction Date"></kendo-grid-column>
+				<kendo-grid-column field="modified_date" title="Last Modified">
+					<ng-template kendoGridFilterCellTemplate let-filter>
+						<kendo-dropdownlist
+							[(ngModel)]="selectedItem1"
+							(valueChange) = "onChange($event)"
+							[data] = "stateComboData" 
+							[defaultItem] = "{ statename: 'Select item...', stateid: null }"
+							[textField] = "'statename'"
+							[valueField] = "'stateid'"
+							[valuePrimitive] = "true">
+						</kendo-dropdownlist>
+					</ng-template>
+				</kendo-grid-column>
+				<kendo-grid-column field="LoginName" title="LoginName" hidden="true"></kendo-grid-column>
+				<kendo-grid-column field="address" title="address" hidden="true"></kendo-grid-column>
+				<kendo-grid-column field="phone" title="phone" hidden="true"></kendo-grid-column>
+				<kendo-grid-column field="nrc" title="nrc" hidden="true"></kendo-grid-column>
+				<kendo-grid-column field="stateid" title="stateId" hidden="true"></kendo-grid-column>
+				<kendo-grid-command-column title="Action" width="200">
+					<ng-template kendoGridCellTemplate let-dataItem>
+						<a class="btn" *ngxPermissionsOnly="'edit'" (click)="editHandler(dataItem)" title="Edit Officer"><i class="fa fa-edit"></i></a>
+						<a class="btn" *ngxPermissionsOnly="'delete'" (click)="showConfirmation(dataItem)" title="Delete Officer"><i class="fa fa-trash"></i></a>
+						<a class="btn" *ngxPermissionsOnly="'edit'" (click)="unBlock(dataItem)" title="UnBlock"><i class="fa fa-unlock"></i></a>
+						<a class="btn" *ngxPermissionsOnly="'edit'" (click)="resetPassword(dataItem)" title="Reset Password"><i class="fa fa-refresh"></i></a>
+					</ng-template>
+				</kendo-grid-command-column>
+			</kendo-grid>
+			<div *ngIf="view.loading" class="k-i-loading"></div>
+		</div>
+	</div>
+</div>
+

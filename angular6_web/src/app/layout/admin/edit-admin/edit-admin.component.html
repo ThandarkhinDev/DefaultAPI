@@ -1,0 +1,137 @@
+
+<div class="col">
+  <div class="">
+    <div class="row-row">
+      <div class="cell">
+        <div class="cell-inner">
+          <div class="wrapper-md ng-scope b-b bg-white-only">
+            <h1 class="m-n h3 font-thin"> Officer Setup</h1>
+          </div>
+          <div class="wrapper-md lter">
+            <div class="hbox h-auto"></div>
+            <form name="editForm" [formGroup]="editForm" class="form-horizontal form-validation pt-4" novalidate>
+              <div class="form-group m-b-sm">
+                <label class="col-sm-4 control-label">Officer ID : <span class="text-danger text-xl font-bold v-middle">*</span></label>
+                <div class="col-md-6 col-sm-7">
+                  <input type="text" name="officerId" class="form-control" formControlName="AdminID" disabled/>
+                </div>
+              </div>
+              <div class="form-group m-b-sm">
+                <label class="col-sm-4 control-label">Officer Name : <span class="text-danger text-xl font-bold v-middle">*</span></label>
+                <div class="col-md-6 col-sm-7">
+                  <input type="text" name="officerName" class="form-control" formControlName="AdminName" />
+                  <div  class="k-tooltip k-tooltip-validation"
+                        [hidden]="editForm.controls.AdminName.valid || editForm.controls.AdminName.pristine">
+                    Officer Name is required
+                  </div>
+                </div>
+              </div>
+              <div class="form-group m-b-sm">
+                <label class="col-sm-4 control-label">Address :</label>
+                <div class="col-md-6 col-sm-7">
+                  <textarea name="address" class="form-control ng-dirty ng-touched" formControlName="address"></textarea>
+                  <div  class="k-tooltip k-tooltip-validation"
+                        [hidden]="editForm.controls.address.valid || editForm.controls.address.pristine">
+                        Address is required !
+                  </div>
+                </div>
+              </div>
+              <div class="form-group m-b-sm">
+                <label class="col-sm-4 control-label">NRC :</label>
+                <div class="col-md-6 col-sm-7">
+                  <textarea name="nrc" class="form-control ng-dirty ng-touched" formControlName="nrc"></textarea>
+                  <div  class="k-tooltip k-tooltip-validation"
+                      [hidden]="editForm.controls.nrc.valid || editForm.controls.nrc.pristine">
+                      Nrc is required
+                  </div>
+                </div>
+              </div>
+              <div class="form-group m-b-sm">
+                <label class="col-sm-4 control-label">Phone No :</label>
+                <div class="col-md-6 col-sm-7">
+                  <textarea name="phone" class="form-control ng-dirty ng-touched" formControlName="phone"></textarea>
+                  <div  class="k-tooltip k-tooltip-validation"
+                      [hidden]="editForm.controls.phone.valid || editForm.controls.phone.pristine">
+                      Phone No is required
+                  </div>
+                </div>
+              </div>
+              <div class="form-group m-b-sm">
+                <label class="col-sm-4 control-label">Login Name : <span class="text-danger text-xl font-bold v-middle">*</span></label>
+                <div class="col-md-6 col-sm-7">
+                  <input type="text" name="LoginName" class="form-control" formControlName="LoginName" ng-keyup="duplicateLoginName(adminSet.LoginName)" ng-blur="duplicateLoginName(adminSet.LoginName)" autocomplete="off" />
+                  <div  class="k-tooltip k-tooltip-validation"
+                      [hidden]="editForm.controls.LoginName.valid || editForm.controls.LoginName.pristine">
+                      Login Name is required
+                  </div>
+                </div>
+              </div>  
+              <div class="form-group m-b-sm">
+                <label class="col-sm-4 control-label">Email : <span class="text-danger text-xl font-bold v-middle">*</span></label>
+                <div class="col-md-6 col-sm-7">
+                  <input type="email" name="Email" class="form-control ng-valid-email" formControlName="Email" autocomplete="off" />
+                  <div  class="k-tooltip k-tooltip-validation"
+                      [hidden]="editForm.controls.Email.valid || editForm.controls.Email.pristine">
+                      invalid email Format! Eg:example@gmail.com
+                  </div>
+                </div>
+              </div>
+              <div class="form-group m-b-sm" *ngIf="isNewAdmin">
+                <label class="col-sm-4 control-label">Password : <span class="text-danger text-xl font-bold v-middle">*</span></label>
+                <div class="col-md-6 col-sm-7">
+                  <input type="password" name="pw" class="form-control" formControlName="Password" ng-pattern="pattern" ng-keyup="requirepwd(adminSet.Password)" ng-blur="requirepwd(adminSet.Password)" autocomplete="off" />
+                  <div  class="k-tooltip k-tooltip-validation"
+                      [hidden]="editForm.controls.Password.valid || editForm.controls.Password.pristine">
+                      Start with uppercase letter,at least one numeric character,at least one special character, Minimum password length is {{minPasswordLength}}.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group m-b-sm" *ngIf="isNewAdmin">
+                <label class="col-sm-4 control-label">Comfirm Password : <span class="text-danger text-xl font-bold v-middle">*</span></label>
+                <div class="col-md-6 col-sm-7">
+                  <input type="password" name="confirmpw" class="form-control" formControlName="ConfirmPassword" >
+                  <div  class="k-tooltip k-tooltip-validation"
+                        [hidden]="editForm.controls.ConfirmPassword.valid || editForm.controls.ConfirmPassword.pristine">
+                        Password Not Match
+                    </div>
+                </div>
+              </div>
+              <div class="form-group m-b-sm">
+                <label class="col-sm-4 control-label">Officer Level : <span class="text-danger text-xl font-bold v-middle">*</span></label>
+                <div class="col-md-6 col-sm-7">
+                  <select class="form-control" name="sysid" formControlName="AdminLevelID">
+                    <option *ngFor="let adminlvl of adminlvls" [ngValue]="adminlvl.AdminLevelID">{{adminlvl.AdminLevel}}</option>
+                  </select>
+                  <div  class="k-tooltip k-tooltip-validation"
+                      [hidden]="editForm.controls.AdminLevelID.valid || editForm.controls.AdminLevelID.pristine">
+                      AdminLevel is required
+                  </div>
+                </div>
+              </div>  
+              <div class="form-group m-b-sm">
+                <label class="col-sm-4 control-label">State : <span class="text-danger text-xl font-bold v-middle">*</span></label>
+                <div class="col-md-6 col-sm-7">
+                  <select class="form-control" name="state" formControlName="stateid">
+                    <option *ngFor="let state of states" [ngValue]="state.stateid">{{state.statename}}</option>
+                  </select>
+                  <div  class="k-tooltip k-tooltip-validation"
+                      [hidden]="editForm.controls.stateid.valid || editForm.controls.stateid.pristine">
+                      State is required
+                  </div>
+                </div>
+              </div>
+              <div class="form-group m-b-sm">
+                <div class="col-sm-offset-4 col-md-7">
+                  <button type="submit" class="btn m-b-xs btn-success" *ngIf="isNewAdmin" [disabled]="!editForm.valid" (click)="saveAdmin()" > Save </button>
+                  <button type="submit" class="btn m-b-xs btn-success" *ngIf="!isNewAdmin" [disabled]="editForm.invalid" (click)="saveAdmin()"> Update </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div kendoDialogContainer></div>
