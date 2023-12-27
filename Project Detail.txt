@@ -1,0 +1,7 @@
+* Accounting1 + dotnet2-1WebAPI
+
+* angular6_web + dotnetcore_api(in Testing2 folder) is before 7.9.18 
+P.S-> both projects clone from gwtgit.globalwavetechnology
+
+* angular6_web((7.9.18) + dotnetcore_api(in Testing2 folder) is after 7.9.18 
+P.S-> both projects clone from gwtgit.globalwavetechnology
