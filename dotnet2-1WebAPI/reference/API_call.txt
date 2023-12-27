@@ -1,0 +1,59 @@
+TEST API
+http://localhost:5000/api/test/check
+http://localhost:5000/api/test/checktoken/ZG90bmV0QVBJ
+http://localhost:5000/api/test/checkdatabase
+
+// "DefaultConnection": "server=139.59.4.172;user id=root;password=gwtsoft;port=3306;database=ojt_donor;Pooling=false;Allow User Variables=True; Convert Zero Datetime=True;ConnectionTimeout=1000"
+
+
+http://gwtgit.globalwavetechnology.com:10020/Training/dotnet2-1WebAPI
+
+    
+GET
+http://localhost:5000/api/income/GetIncome/0
+//GetIncome is fx name and 0 is parameter
+http://localhost:5000/api/income/GetIncome/1
+//GetIncome is fx name and 1 is parameter
+
+
+http://localhost:5000/api/expense/GetExpense/0
+http://localhost:5000/api/expense/GetExpense/1
+
+
+http://localhost:5000/api/income/GetIncomeByName/add
+http://localhost:5000/api/income/GetIncomeByDateRange/2018-01-10/2018-07-01
+
+POST (Add New)
+http://localhost:5000/api/income/SaveIncome
+token: ZG90bmV0QVBJ
+objInfo: {IncomeID:0, DonarName: "test1", Amount: "10000"}
+
+POST (edit)
+http://localhost:5000/api/income/SaveIncome
+token: ZG90bmV0QVBJ
+objInfo: {IncomeID:1, DonarName: "add", Amount: "1000"}
+
+Delete
+http://localhost:5000/api/income/DeleteIncome/5
+
+DateRange
+http://localhost:5000/api/income/GetIncomeByDateRange/{fromdate}/{todate}
+
+http://localhost:5000/api/income/GetIncomeReportByDateRange/{fromdate}/{todate}
+http://localhost:5000/api/expense/GetExpenseReportByDateRange/{fromdate}/{todate}
+
+2018-01-08 16:22:25/2018-05-08 16:22:25
+
+
+http://localhost:5000/api/report/GetReport/2018-01-08/2018-07-08
+
+http://localhost:5000/api/total/GetTotal/2018-01-08/2018-07-08
+
+http://localhost:5000/api/total/GetTotalIncomeWithoutDateRange
+http://localhost:5000/api/total/GetTotalExpenseWithoutDateRange
+http://localhost:5000/api/total/GetTotalWithoutDateRange
+
+http://localhost:5000/api/total/GetExpenseReportByDateRange/2018-01-08 16:22:25/2018-05-08 16:22:25
+
+
+
